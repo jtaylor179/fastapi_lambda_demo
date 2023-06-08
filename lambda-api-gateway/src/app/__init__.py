@@ -5,7 +5,7 @@ from aws_lambda_powertools import Tracer
 from aws_lambda_powertools import Metrics
 from aws_lambda_powertools.utilities.data_classes import APIGatewayProxyEventV2
 from aws_lambda_powertools.metrics import MetricUnit
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 import functools
 from starlette.requests import Request
 
@@ -17,9 +17,9 @@ metrics = Metrics()
 app = FastAPI()
 
 class Transaction(BaseModel):
-    id: int
-    name: str
-    value: float
+    id: int = Field(..., example=1)
+    name: str = Field(..., example="buy apple")
+    value: float = Field(..., example=1000.00)
 
 transactions = []
 
